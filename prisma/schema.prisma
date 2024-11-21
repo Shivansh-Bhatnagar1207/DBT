@@ -25,6 +25,6 @@ model Student {
   BPL             String
   Height          Int
   Weight          Int
-  DOA             DateTime @default(now())
+  DOA             DateTime 
   DOB             DateTime
 }
