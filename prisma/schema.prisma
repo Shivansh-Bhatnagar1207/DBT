@@ -8,8 +8,9 @@ datasource db {
 }
 
 model Student {
-  id              String   @id
+  id              String   @id @default(cuid())
   Class           Int
+  SrNo            Int
   Student_Name    String
   Gender          String
   Mother_Name     String?
@@ -27,4 +28,5 @@ model Student {
   Weight          Int
   DOA             DateTime 
   DOB             DateTime
+  Created_by  String
 }
