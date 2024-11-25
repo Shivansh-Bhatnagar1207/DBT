@@ -1,6 +1,5 @@
 import React from "react";
 import { CreateStudent } from "@/app/action";
-import { auth } from "@clerk/nextjs/server";
 
 export default function Create() {
   return (
