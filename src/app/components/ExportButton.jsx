@@ -6,18 +6,23 @@ import * as XLSX from "xlsx";
 export default function ExportButton({ students }) {
   const exportToExcel = () => {
     const data = students.map((student) => ({
-      "Sr No": student.SrNo,
-      "Name": student.Student_Name,
-      "Class": student.Class,
-      "Adhaar": student.Student_Adhaar,
-      "Gender": student.Gender,
+      "Sr No": student.SrNo || "N/A",
+      "Name": student.Student_Name || "N/A",
+      "Class": student.Class || "N/A",
+      "Student Adhaar": student.Student_Adhaar || "N/A",
+      "Gender": student.Gender || "N/A",
       "Father's Name": student.Father_Name || "N/A",
+      "Father's Adhaar": student.Father_Adhaar || "N/A",
       "Mother's Name": student.Mother_Name || "N/A",
+      "Mother's Adhaar": student.Mother_Adhaar || "N/A",
       "Guardian's Name": student.Guardian_Name || "N/A",
-      "Address": student.Address,
-      "Mobile": student.Mobile,
+      "Category": student.Social_Catigory || "N/A",
+      "C/O": student.Care_of || "N/A",
+      "Address": student.Address || "N/A",
+      "Mobile": student.Mobile || "N/A",
       "Email": student.Email || "N/A",
-      "Date of Birth": student.DOB,
+      "DOB": student.DOB || "N/A",
+      "DOA": student.DOA || "N/A",
     }));
 
     // Create a worksheet and workbook

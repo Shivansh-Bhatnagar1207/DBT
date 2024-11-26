@@ -31,3 +31,9 @@ export async function CreateStudent(formdata) {
     })
     redirect('/')
 }
+
+
+export async function DeleteStudent(studentId) {
+    await prisma.student.delete({ where: { id: studentId } })
+
+}
