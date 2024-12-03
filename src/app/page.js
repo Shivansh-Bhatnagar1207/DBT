@@ -3,7 +3,7 @@ import Card from './components/Card'
 export default function Home() {
 
   return (
-    <>
+    <div className='h-screen bg-home-bg bg-bottom bg-cover'>
       <div className='p-5 text-2xl font-bold text-center'>
         Welcome to DBT
       </div>
@@ -11,6 +11,6 @@ export default function Home() {
         <Card title={'Enter Student'} contents={'Click here to Enter students details'} to={'/Create'} />
         <Card title={'All Student'} contents={'Click here to Display all students details'} to={'/All'} />
       </div>
-    </>
+    </div>
   )
 }

@@ -1,34 +1,25 @@
 "use client"; // Client-side interactions
 
-import React from "react";
+import React,{startTransition} from "react";
 import { DeleteStudent } from "@/app/action";
 
 export default function DeleteButton({ studentId }) {
-
   const handleDelete = () => {
     if (!confirm("Are you sure you want to delete this student?")) {
       return;
     }
 
     startTransition(async () => {
-      const result = await DeleteStudent(studentId); // Call server action
-      if (result.success) {
-        alert(result.message);
-      } else {
-        alert(`Error: ${result.message}`);
-      }
+      const result = await DeleteStudent(studentId);
     });
   };
 
   return (
     <button
       onClick={handleDelete}
-      disabled={isPending}
-      className={`px-4 py-2 rounded ${
-        isPending ? "bg-gray-400" : "bg-red-500 hover:bg-red-600"
-      } text-white`}
+      className={'px-4 py-2 rounded bg-gray-400" text-white bg-red-600'}
     >
-      {isPending ? "Deleting..." : "Delete"}
+      Delete
     </button>
   );
 }

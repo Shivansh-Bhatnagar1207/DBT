@@ -11,6 +11,10 @@ module.exports = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      backgroundImage: {
+        'animated-bg': "url('/bg.gif')",
+        'home-bg': "url('/home_bg.png')"
+      }
     },
   },
   plugins: [],
