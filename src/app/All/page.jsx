@@ -8,11 +8,14 @@ export default async function All() {
   const userID = (await auth()).userId;
 
   // Fetch students created by the current user
-  const Students = await prisma.student.findMany({
-    where: {
-      Created_by: userID,
-    },
-  });
+  let Students =[]
+  if (userID) {
+    Students = await prisma.student.findMany({
+      where: {
+        Created_by: userID,
+      },
+    });
+  }
 
   return (
     <div className="px-8">

@@ -34,6 +34,10 @@ export async function CreateStudent(formdata) {
 
 
 export async function DeleteStudent(studentId) {
-    await prisma.student.delete({ where: { id: studentId } })
+    try {
+        await prisma.student.delete({ where: { id: studentId } })
+    } catch (err) {
+        throw err
+    }
 
 }
