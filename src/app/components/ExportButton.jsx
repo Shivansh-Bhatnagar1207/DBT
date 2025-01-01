@@ -1,37 +1,68 @@
 "use client"; // Enables client-side interactivity
 
 import React from "react";
-import * as XLSX from "xlsx";
+import ExcelJS from "exceljs";
 
 export default function ExportButton({ students }) {
-  const exportToExcel = () => {
-    const data = students.map((student) => ({
-      "Sr No": student.SrNo || "N/A",
-      "Name": student.Student_Name || "N/A",
-      "Class": student.Class || "N/A",
-      "Student Adhaar": student.Student_Adhaar || "N/A",
-      "Gender": student.Gender || "N/A",
-      "Father's Name": student.Father_Name || "N/A",
-      "Father's Adhaar": student.Father_Adhaar || "N/A",
-      "Mother's Name": student.Mother_Name || "N/A",
-      "Mother's Adhaar": student.Mother_Adhaar || "N/A",
-      "Guardian's Name": student.Guardian_Name || "N/A",
-      "Category": student.Social_Catigory || "N/A",
-      "C/O": student.Care_of || "N/A",
-      "Address": student.Address || "N/A",
-      "Mobile": student.Mobile || "N/A",
-      "Email": student.Email || "N/A",
-      "DOB": student.DOB || "N/A",
-      "DOA": student.DOA || "N/A",
-    }));
+  const exportToExcel = async () => {
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet("Students");
 
-    // Create a worksheet and workbook
-    const worksheet = XLSX.utils.json_to_sheet(data);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Students");
+    // Add header row
+    worksheet.columns = [
+      { header: "Sr No", key: "SrNo", width: 10 },
+      { header: "Name", key: "Student_Name", width: 20 },
+      { header: "Class", key: "Class", width: 10 },
+      { header: "Student Adhaar", key: "Student_Adhaar", width: 20 },
+      { header: "Gender", key: "Gender", width: 10 },
+      { header: "Father's Name", key: "Father_Name", width: 20 },
+      { header: "Father's Adhaar", key: "Father_Adhaar", width: 20 },
+      { header: "Mother's Name", key: "Mother_Name", width: 20 },
+      { header: "Mother's Adhaar", key: "Mother_Adhaar", width: 20 },
+      { header: "Guardian's Name", key: "Guardian_Name", width: 20 },
+      { header: "Category", key: "Social_Catigory", width: 15 },
+      { header: "C/O", key: "Care_of", width: 10 },
+      { header: "Address", key: "Address", width: 30 },
+      { header: "Mobile", key: "Mobile", width: 15 },
+      { header: "Email", key: "Email", width: 25 },
+      { header: "DOB", key: "DOB", width: 15 },
+      { header: "DOA", key: "DOA", width: 15 },
+    ];
 
-    // Export workbook
-    XLSX.writeFile(workbook, "Students_Data.xlsx");
+    // Add rows
+    students.forEach((student) => {
+      worksheet.addRow({
+        SrNo: student.SrNo || "N/A",
+        Student_Name: student.Student_Name || "N/A",
+        Class: student.Class || "N/A",
+        Student_Adhaar: student.Student_Adhaar || "N/A",
+        Gender: student.Gender || "N/A",
+        Father_Name: student.Father_Name || "N/A",
+        Father_Adhaar: student.Father_Adhaar || "N/A",
+        Mother_Name: student.Mother_Name || "N/A",
+        Mother_Adhaar: student.Mother_Adhaar || "N/A",
+        Guardian_Name: student.Guardian_Name || "N/A",
+        Social_Catigory: student.Social_Catigory || "N/A",
+        Care_of: student.Care_of || "N/A",
+        Address: student.Address || "N/A",
+        Mobile: student.Mobile || "N/A",
+        Email: student.Email || "N/A",
+        DOB: student.DOB || "N/A",
+        DOA: student.DOA || "N/A",
+      });
+    });
+
+    // Export the file
+    const buffer = await workbook.xlsx.writeBuffer();
+
+    // Trigger file download
+    const blob = new Blob([buffer], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "Students_Data.xlsx";
+    link.click();
   };
 
   return (
