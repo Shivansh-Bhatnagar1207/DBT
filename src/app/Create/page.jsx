@@ -1,5 +1,5 @@
 import React from "react";
-import { CreateStudent } from "@/app/action";
+// import { CreateStudent } from "@/app/action";
 
 export default function Create() {
   return (
@@ -9,7 +9,7 @@ export default function Create() {
       </div>
       <form
         className="grid grid-cols-1 md:grid-cols-2 gap-4 p-5"
-        action={CreateStudent}
+        // action={CreateStudent}`
       >
         {/* Class */}
         <div>

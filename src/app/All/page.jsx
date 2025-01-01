@@ -1,22 +1,9 @@
 import React from "react";
-import { prisma } from "../lib/prisma";
-import { auth } from "@clerk/nextjs/server";
 import ExportButton from "@/app/components/ExportButton"; // Import the Client Component
-import DeleteButton from "../components/DeleteButton";
 
 export default async function All() {
-  const userID = (await auth()).userId;
 
-  // Fetch students created by the current user
-  let Students =[]
-  if (userID) {
-    Students = await prisma.student.findMany({
-      where: {
-        Created_by: userID,
-      },
-    });
-  }
-
+  const Students = []
   return (
     <div className="px-8">
       <div className="text-center text-4xl font-bold p-4">
